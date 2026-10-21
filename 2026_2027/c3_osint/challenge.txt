@@ -1,0 +1,12 @@
+=== IEEE BrokenShells - Challenge 3: OSINT ===
+
+A student at my department arrived in Volos with her electric car. Her battery 
+has max capacitance of 50kWh and she had 20%. She stopped at the charger of the
+photo and sent a message to the groupchat "I'm charging till 80% and I'm coming".
+
+Question 1: What's the general area where the charger is at called?
+Question 2: Who is the operator/company of the charger and what the charger max power (in kW)?
+Question 3: How many minutes will they need to charge from 20% to 80%? (Assume that the charger
+is charging at max of his power constantly with no losses.)
+
+Flag Format: BSHELL{AREANAME_COMPANY_MINUTES}

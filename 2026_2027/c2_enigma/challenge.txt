@@ -1,0 +1,18 @@
+=== IEEE BrokenShells - Challenge 2: Enigma ===
+
+We intercepted one Enigma I (M3) message. We also recovered the full
+machine settings, including the message key. Use the provided
+EnigmaMachine class to decrypt it, then read the flag out of the plaintext.
+
+SETTINGS
+  Rotors (left to right): I II III
+  Ring settings:          1 1 1
+  Reflector:              B
+  Plugboard:              AM FI NV PS TU WZ
+  Message key (start):    VOL
+
+CIPHERTEXT
+GFBQPBCXSIEMHNJNDMCPVCHQUMHZHDAXTTYJMQVFMPIDGYSXFLTDTCBKKJCFUMNVQMRVXGAJJZLMC
+
+The flag is BSHELL{...}. Enigma only enciphers A-Z, so the plaintext
+spells the flag body in letters: find FLAGIS...X and wrap it in BSHELL{}.

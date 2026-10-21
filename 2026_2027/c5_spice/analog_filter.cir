@@ -1,0 +1,43 @@
+* ============================================================
+*  analog_filter.cir  --  Active twin-T NOTCH (band-stop)
+*  Center ~1336 Hz. Deeply attenuates 1336 Hz, passes the
+*  neighbouring DTMF tones (1209 / 1477 Hz) with little loss.
+*  Run an .ac sweep to read the notch frequency off the plot;
+*  that is the tone you must remove from carrier.wav.
+*     f0 = 1 / (2*pi*R*C),  R = 11.9k, C = 10n  -> ~1336 Hz
+*  Q is boosted by bootstrapping the twin-T ground node to a
+*  buffered fraction k of the output (k = 0.975 -> Q ~ 10).
+* ============================================================
+
+* ---- Ideal op-amp (very high gain) ----
+.subckt opamp inp inn out
+Rin inp inn 10Meg
+E1  out 0 inp inn 1e6
+.ends
+
+* ---- Signal source (AC = 1 for .ac sweep) ----
+Vin in 0 AC 1
+
+* ---- Twin-T network (R=11.9k, C=10n) ----
+R1 in  n1  11.9k
+R2 n1  out 11.9k
+C3 n1  nb  20n
+C1 in  n2  10n
+C2 n2  out 10n
+R3 n2  nb  5.95k
+
+* ---- Output buffer (unity gain): vo = twin-T output ----
+Xbuf out vo vo opamp
+
+* ---- Bootstrap: nb = k*vo via buffered divider (k = 39k/40k = 0.975) ----
+Ra vo nd 1k
+Rb nd 0  39k
+Xboot nd nb nb opamp
+
+* ---- AC sweep: 100 Hz .. 10 kHz ----
+.control
+ac dec 200 100 10k
+wrdata ac_out.txt vdb(vo)
+.endc
+
+.end
